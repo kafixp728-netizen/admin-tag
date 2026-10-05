@@ -1,0 +1,31 @@
+local Players = game:GetService("Players")
+
+-- Put your Roblox UserId here
+local ADMIN_USER_ID = 10462179208
+
+Players.PlayerAdded:Connect(function(player)
+	if player.UserId ~= ADMIN_USER_ID then
+		return
+	end
+
+	player.CharacterAdded:Connect(function(character)
+		local head = character:WaitForChild("Head")
+
+		local billboard = Instance.new("BillboardGui")
+		billboard.Name = "AdminTag"
+		billboard.Size = UDim2.new(0, 120, 0, 40)
+		billboard.StudsOffset = Vector3.new(0, 3, 0)
+		billboard.AlwaysOnTop = true
+		billboard.Parent = head
+
+		local text = Instance.new("TextLabel")
+		text.Size = UDim2.new(1, 0, 1, 0)
+		text.BackgroundTransparency = 1
+		text.Text = "👑 ADMIN"
+		text.TextColor3 = Color3.fromRGB(255, 70, 70)
+		text.TextStrokeTransparency = 0
+		text.TextScaled = true
+		text.Font = Enum.Font.GothamBold
+		text.Parent = billboard
+	end)
+end)
